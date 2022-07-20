@@ -2,7 +2,8 @@ restartPolicy: Always
 
 kind: Deployment
 
-podDisruptionBudget: {}
+podDisruptionBudget:
+  {}
   # maxUnavailable: 0
 
 ## Additional blackbox-exporter container environment variables
@@ -13,7 +14,8 @@ podDisruptionBudget: {}
 ##   NO_PROXY: "localhost,127.0.0.1"
 extraEnv: {}
 
-extraVolumes: []
+extraVolumes:
+  []
   # - name: secret-blackbox-oauth-htpasswd
   #   secret:
   #     defaultMode: 420
@@ -31,7 +33,8 @@ extraVolumeMounts:
 ##
 extraInitContainers: []
 
-extraContainers: []
+extraContainers:
+  []
   # - name: oAuth2-proxy
   #   args:
   #     - -https-address=:9116
@@ -99,25 +102,26 @@ affinity: {}
 # in favor of the config value.
 configExistingSecretName: ""
 # Store the configuration as a `Secret` instead of a `ConfigMap`, useful in case it contains sensitive data
-# secretConfig: false
-# config:
-#   modules:
-#     http_2xx:
-#       prober: http
-#       timeout: 5s
-#       http:
-#         valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
-#         follow_redirects: true
-#         preferred_ip_protocol: "ip4"
-#         valid_status_codes:
-#         - 200
-#         # - 401
-#         # - 403
-#         bearer_token: 
+secretConfig: false
+config:
+  modules:
+    http_2xx:
+      prober: http
+      timeout: 5s
+      http:
+        valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]
+        follow_redirects: true
+        preferred_ip_protocol: "ip4"
+        valid_status_codes:
+          - 200
+        # - 401
+        # - 403
+        bearer_token: RGSLOZTRLEKQURYS3MQ83LXXMYLXV7FBN628PS6VIITPX1YNGO
 # Set custom config path, other than default /config/blackbox.yaml. If let empty, path will be "/config/blackbox.yaml"
 # configPath: "/foo/bar"
 
-extraConfigmapMounts: []
+extraConfigmapMounts:
+  []
   # - name: certs-configmap
   #   mountPath: /etc/secrets/ssl/
   #   subPath: certificates.crt # (optional)
@@ -127,7 +131,8 @@ extraConfigmapMounts: []
 
 ## Additional secret mounts
 # Defines additional mounts with secrets. Secrets must be manually created in the namespace.
-extraSecretMounts: []
+extraSecretMounts:
+  []
   # - name: secret-files
   #   mountPath: /etc/secrets
   #   secretName: blackbox-secret-files
@@ -136,7 +141,8 @@ extraSecretMounts: []
 
 allowIcmp: false
 
-resources: {}
+resources:
+  {}
   # limits:
   #   memory: 300Mi
   # requests:
@@ -169,7 +175,8 @@ serviceAccount:
 ingress:
   enabled: false
   className: ""
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
@@ -195,7 +202,8 @@ hostAliases: []
 pod:
   labels: {}
 
-extraArgs: []
+extraArgs:
+  []
   # - --history.limit=1000
 
 replicas: 1
